@@ -4,39 +4,30 @@ import { NotebookPage } from "../hw_08/page/catalog_notebook.page";
 
 
 describe('UI test by site Onliner', () => {
-    let driver: any;
-
-    beforeEach(async () => {
-        driver = await new Builder().forBrowser('chrome').build();
-    });
 
     test('1 check open modal search window', async () => {
-        //let driver: WebDriver = await new Builder().forBrowser('chrome').build();
-        const origin = new StartPage(driver);
-        origin.open();
-        origin.openUrl();
-        origin.fs();
-
-        const modalWindow = await origin.f1();
-        expect(modalWindow instanceof WebElement).toBe(true);
-        expect(await modalWindow.isDisplayed()).toBeTruthy();
-        origin.close();
-    });
+        let driver: WebDriver = await new Builder().forBrowser('chrome').build();
+        await driver.manage().window().maximize();
+        await driver.get('https:onliner.by.');
+        const originInput = await driver.findElement(By.className('fast-search__input'));
+        originInput.sendKeys('xbox');
+        const modalSearch = await driver.findElement(By.id('fast-search-modal'));
+        expect(await modalSearch.isDisplayed()).toBeTruthy();
+        await driver.quit();
+    })
 
 
 
     test('2 open tab notebook in project-navigation__link_primary', async () => {
-
-        const tabNotebook = new StartPage(driver);
-        tabNotebook.open();
-        tabNotebook.openUrl();
-        tabNotebook.fc();
-
-        await driver.wait(until.urlIs('https://catalog.onliner.by/notebook'), 20000);
+        let driver: WebDriver = await new Builder().forBrowser('chrome').build();
+        await driver.manage().window().maximize();
+        await driver.get('https:onliner.by.');
+        const hrefNotebook = await driver.findElement(By.xpath('//a[contains(@class, "project-navigation__link_primary") and @href="https://catalog.onliner.by/notebook"]'));
+        await driver.wait(until.elementIsVisible(hrefNotebook), 10000); // Ожидание видимости элемента
+        await hrefNotebook.click();
         const currentUrl = await driver.getCurrentUrl();
         expect(currentUrl).toBe('https://catalog.onliner.by/notebook');
-
-        tabNotebook.close();
+        await driver.quit();
     });
 
     // test('2 open tab notebook in project-navigation__link_primary', async () => {
