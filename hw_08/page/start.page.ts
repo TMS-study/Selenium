@@ -4,7 +4,7 @@ import { BasePage } from "./base.page";
 export class StartPage extends BasePage {
     private readonly originInput: By = By.className('fast-search__input');
     private readonly modalSearch: By = By.id('fast-search-modal');
-    private readonly hrefNotebook = By.xpath('//a[contains(@class, "project-navigation__link_primary") and @href="https://catalog.onliner.by/notebook"]');
+    private readonly hrefNotebook: By = By.xpath('//a[contains(@class, "project-navigation__link_primary") and @href="https://catalog.onliner.by/notebook"]');
 
     async openUrl() {
         await this.driver.get('https:onliner.by.');

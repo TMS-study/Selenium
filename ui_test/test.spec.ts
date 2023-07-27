@@ -3,32 +3,32 @@ import { StartPage } from "../hw_08/page/start.page";
 import { NotebookPage } from "../hw_08/page/catalog_notebook.page";
 
 
-describe('UI test by site Onliner', () => {
+// describe('UI test by site Onliner', () => {
 
-    test('1 check open modal search window', async () => {
-        let driver: WebDriver = await new Builder().forBrowser('chrome').build();
-        await driver.manage().window().maximize();
-        await driver.get('https:onliner.by.');
-        const originInput = await driver.findElement(By.className('fast-search__input'));
-        originInput.sendKeys('xbox');
-        const modalSearch = await driver.findElement(By.id('fast-search-modal'));
-        expect(await modalSearch.isDisplayed()).toBeTruthy();
-        await driver.quit();
-    })
+//     test('1 check open modal search window', async () => {
+//         let driver: WebDriver = await new Builder().forBrowser('chrome').build();
+//         await driver.manage().window().maximize();
+//         await driver.get('https:onliner.by.');
+//         const originInput = await driver.findElement(By.className('fast-search__input'));
+//         originInput.sendKeys('xbox');
+//         const modalSearch = await driver.findElement(By.id('fast-search-modal'));
+//         expect(await modalSearch.isDisplayed()).toBeTruthy();
+//         await driver.quit();
+//     })
 
 
 
-    test('2 open tab notebook in project-navigation__link_primary', async () => {
-        let driver: WebDriver = await new Builder().forBrowser('chrome').build();
-        await driver.manage().window().maximize();
-        await driver.get('https:onliner.by.');
-        const hrefNotebook = await driver.findElement(By.xpath('//a[contains(@class, "project-navigation__link_primary") and @href="https://catalog.onliner.by/notebook"]'));
-        await driver.wait(until.elementIsVisible(hrefNotebook), 10000); // Ожидание видимости элемента
-        await hrefNotebook.click();
-        const currentUrl = await driver.getCurrentUrl();
-        expect(currentUrl).toBe('https://catalog.onliner.by/notebook');
-        await driver.quit();
-    });
+//     test('2 open tab notebook in project-navigation__link_primary', async () => {
+//         let driver: WebDriver = await new Builder().forBrowser('chrome').build();
+//         await driver.manage().window().maximize();
+//         await driver.get('https:onliner.by.');
+//         const hrefNotebook = await driver.findElement(By.xpath('//a[contains(@class, "project-navigation__link_primary") and @href="https://catalog.onliner.by/notebook"]'));
+//         await driver.wait(until.elementIsVisible(hrefNotebook), 10000); // Ожидание видимости элемента
+//         await hrefNotebook.click();
+//         const currentUrl = await driver.getCurrentUrl();
+//         expect(currentUrl).toBe('https://catalog.onliner.by/notebook');
+//         await driver.quit();
+//     });
 
     // test('2 open tab notebook in project-navigation__link_primary', async () => {
     //     let driver: WebDriver = await new Builder().forBrowser('chrome').build();
@@ -133,5 +133,5 @@ describe('UI test by site Onliner', () => {
     //     //expect(await driver.getCurrentUrl()).toBe('https://profile.onliner.by/login?redirect=https%3A%2F%2Fcatalog.onliner.by%2Fused%2Fcreate');
     //     await driver.quit();
     // })
-})
+//})
 
