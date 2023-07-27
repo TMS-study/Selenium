@@ -1,10 +1,9 @@
 import { WebDriver } from "selenium-webdriver";
+import { BasePage } from "./base.page";
 
-export class NotebookPage {
-    constructor(protected driver: WebDriver) {
-    };
+export class NotebookPage extends BasePage {
 
-    async open(): Promise<void> {
+    async openUrl() {
         await this.driver.get('https://catalog.onliner.by/notebook');
     };
 }
