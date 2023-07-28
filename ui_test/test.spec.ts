@@ -128,7 +128,7 @@ describe('UI test by site Onliner', () => {
         const placeAnAd = await driver.findElement(By.id('schema-top-button'));
         placeAnAd.click();
         const login = await driver.findElement(By.css('.no-touch'));
-        expect(await driver.findElement(By.css('.no-touch')).isDisplayed()).toBeTruthy();
+        expect(await login.isDisplayed()).toBeTruthy();
         //expect(await driver.getCurrentUrl()).toBe('https://profile.onliner.by/login?redirect=https%3A%2F%2Fcatalog.onliner.by%2Fused%2Fcreate');
         await driver.quit();
     })
