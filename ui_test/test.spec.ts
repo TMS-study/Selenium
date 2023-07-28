@@ -1,5 +1,6 @@
 import { Builder, By, WebDriver, WebElement, until } from "selenium-webdriver";
 
+
 describe('UI test by site Onliner', () => {
 
     test('1 check open modal search window', async () => {
@@ -14,6 +15,18 @@ describe('UI test by site Onliner', () => {
     })
 
 
+
+    test('2 open tab notebook in project-navigation__link_primary', async () => {
+        let driver: WebDriver = await new Builder().forBrowser('chrome').build();
+        await driver.manage().window().maximize();
+        await driver.get('https:onliner.by.');
+        const hrefNotebook = await driver.findElement(By.xpath('//a[contains(@class, "project-navigation__link_primary") and @href="https://catalog.onliner.by/notebook"]'));
+        await driver.wait(until.elementIsVisible(hrefNotebook), 10000); // Ожидание видимости элемента
+        await hrefNotebook.click();
+        const currentUrl = await driver.getCurrentUrl();
+        expect(currentUrl).toBe('https://catalog.onliner.by/notebook');
+        await driver.quit();
+    });
 
     test('2 open tab notebook in project-navigation__link_primary', async () => {
         let driver: WebDriver = await new Builder().forBrowser('chrome').build();
@@ -42,12 +55,14 @@ describe('UI test by site Onliner', () => {
     await checkboxMinipay.click();
     await checkboxPrime.click();
 
+    await driver.sleep(2000);
+
     const selectMinipay = await driver.findElement(By.css('label.schema-filter__bonus-item.schema-filter__bonus-item_primary  .i-checkbox__real'))
     const selectPrime = await driver.findElement(By.css('label.schema-filter__bonus-item.schema-filter__bonus-item_alter .i-checkbox__real'));
     expect(await selectMinipay.isSelected()).toBeTruthy();
     expect(await selectPrime.isSelected()).toBeTruthy();
 
-    // let listProductFilter; 
+    // let listProductFilter; не помню зачем делала, хм
     // try {
     //     listProductFilter = await driver.findElements(By.css('.js-schema-results.schema-grid__center-column'));
     //     const isDisplayedResults = await Promise.all(listProductFilter.map(element => element.isDisplayed()));
@@ -55,7 +70,6 @@ describe('UI test by site Onliner', () => {
     // } catch (error) {
     //     console.error('Элементов не найдено', error);
     // }
-
         const listProductFilter = await driver.findElement(By.css('.js-schema-results.schema-grid__center-column'));
         expect(await listProductFilter.isDisplayed()).toBeTruthy();
 
@@ -73,7 +87,7 @@ describe('UI test by site Onliner', () => {
         const product = await driver.findElement(By.xpath('//*[@id="schema-products"]/div[@class = "schema-product__group"][1]//a[@class = "schema-product__button button button_orange js-product-price-link"]'));
         product.click();
         await driver.sleep(2000);
-        
+
         // скроллим к группе прдлоежний и кликаем ( чтобы убрать все модалки, который могут заслонять кнопки)
         const groupList = await driver.findElement(By.xpath('//div[@class="offers-list__group"]'));
         await driver.executeScript("arguments[0].scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });", groupList);
@@ -102,8 +116,6 @@ describe('UI test by site Onliner', () => {
     });
 
 
-
-
     test('5 place an ad by an unauthorized user', async () => {
         let driver: WebDriver = await new Builder().forBrowser('chrome').build();
         await driver.manage().window().maximize();
@@ -119,6 +131,6 @@ describe('UI test by site Onliner', () => {
         //expect(await driver.getCurrentUrl()).toBe('https://profile.onliner.by/login?redirect=https%3A%2F%2Fcatalog.onliner.by%2Fused%2Fcreate');
         await driver.quit();
     })
-
 })
+
 
