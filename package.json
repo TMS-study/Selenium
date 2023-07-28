@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest ui_test/test.spec.ts"
+    "test": "jest ui_test/test.spec.ts",
+    "test1": "jest hw_08/test/test.spec.ts"
   },
   "author": "",
   "license": "ISC",
